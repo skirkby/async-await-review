@@ -174,7 +174,7 @@ function doPromise() {
         // Some things you need to do no matter what the result of the promise
         // was.
         .finally(() => {
-            console.log(`${atTime(new Date())} :     Finally! - (promise call)`);
+            console.log(`${atTime()} :     Finally! - (promise call)`);
         });
 }
 
@@ -194,7 +194,7 @@ doPromise();
 // In the console, you should see the following log entry first, then when the
 // "long running work" is completed, you will see the log entry in our handlers
 // above. 
-console.log(`${atTime(new Date())} : done calling promiseFunction()`);
+console.log(`${atTime()} : done calling promiseFunction()`);
 
 
 // use async/await syntax
@@ -230,7 +230,7 @@ async function doAsyncAwait() {
         // in this "finally" block will be executed, just as with the .finally()
         // call above.
     } finally {
-        console.log(`${atTime(new Date())} :     Finally! - (async call)`);
+        console.log(`${atTime()} :     Finally! - (async call)`);
     }
 }
 
@@ -242,5 +242,5 @@ doAsyncAwait();
 // for other things... but calling .then() and .catch() isn't necessary, as the
 // try..catch..finally block inside the async() function takes care of it for
 // us.
-console.log(`${atTime(new Date())} : done calling async() method`);
+console.log(`${atTime()} : done calling async() method`);
 
