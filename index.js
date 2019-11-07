@@ -150,25 +150,26 @@ function doPromise() {
     promiseFunction()
         // when the promise object is resolved, the value passed to the
         // Promise.resolve() method is sent in to our callback (which we pass to
-        // .then() below). Here, I've named the parameter in our callback function
-        // "successResult". 
+        // .then() below). Here, I've named the parameter in our callback
+        // function "successResult". 
         .then(successResult => {
             console.log(`${successResult} - (promise call)`);
         })
         // when the promise object is rejected, or if there is an exception, the
-        // value passed to the Promise.reject() method (or the object that is thrown
-        // in the exception) is sent in to our callback (which we pass to .catch()
-        // below). Here, I've named the parameter in our callback function
-        // "errorResult". 
+        // value passed to the Promise.reject() method (or the object that is
+        // thrown in the exception) is sent in to our callback (which we pass to
+        // .catch() below). Here, I've named the parameter in our callback
+        // function "errorResult". 
         .catch(errorResult => {
             console.log(`${errorResult} - (promise call)`);
         })
         // the finally function is added to the "promise chain", and is *always*
-        // executed, whether the promise resolved or rejected, whether the .then()
-        // function was called, or the .catch() function. This gives you an
-        // opportunity to perform "clean up" code (closing DB connections, cleaning
-        // up setTimeouts(), etc.), whether there was an error or not. Some things
-        // you need to do no matter what the result of the promise was.
+        // executed, whether the promise resolved or rejected, whether the
+        // .then() function was called, or the .catch() function. This gives you
+        // an opportunity to perform "clean up" code (closing DB connections,
+        // cleaning up setTimeouts(), etc.), whether there was an error or not.
+        // Some things you need to do no matter what the result of the promise
+        // was.
         .finally(() => {
             console.log(`${atTime(new Date())} :     Finally! - (promise call)`);
         });
@@ -179,9 +180,13 @@ doPromise();
 // The call to promiseFunction() immediately returns a Promise object, even if
 // the long running work in promiseFunction() isn't done yet (assuming the long
 // running work is executed asynchronously). We then call .then() on the Promise
-// object that is returned in order to "register" a "handler" for the "resolved"
-// value of the promise (which is passed to our handler callback when the
-// promise is resolved.)
+// object that is returned in order to "register" a callback on the "promise
+// chain" for the "resolved" value of the promise (which is passed to our
+// handler callback when the promise is resolved.) We also call .catch() on the
+// promise returned by .then() to register a callback for the "rejected" value
+// of the promise (which is passed to our handler callback when the promise is
+// rejected.) Lastly, we call .finally() on the promise returned by .catch() to
+// register a callback to the promise chain
 //
 // In the console, you should see the following log entry first, then when the
 // "long running work" is completed, you will see the log entry in our handlers
@@ -232,6 +237,7 @@ doAsyncAwait();
 // don't use that promise object to register our handler functions. The handler
 // code is actually inside the async function. We could use the returned Promise
 // for other things... but calling .then() and .catch() isn't necessary, as the
-// try..catch block inside the async() function takes care of it for us.
+// try..catch..finally block inside the async() function takes care of it for
+// us.
 console.log(`${atTime(new Date())} : done calling async() method`);
 
