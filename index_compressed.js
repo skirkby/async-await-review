@@ -57,12 +57,12 @@ function doPromise() {
             console.log(`${errorResult} - (promise call)`);
         })
         .finally(() => {
-            console.log(`${atTime(new Date())} :     Finally! - (promise call)`);
+            console.log(`${atTime()} :     Finally! - (promise call)`);
         });
 }
 
 doPromise();
-console.log(`${atTime(new Date())} : done calling promiseFunction()`);
+console.log(`${atTime()} : done calling promiseFunction()`);
 
 async function doAsyncAwait() {
     try {
@@ -71,10 +71,10 @@ async function doAsyncAwait() {
     } catch (errorResult) {
         console.log(`${errorResult} - (async call)`);
     } finally {
-        console.log(`${atTime(new Date())} :     Finally! - (async call)`);
+        console.log(`${atTime()} :     Finally! - (async call)`);
     }
 }
 
 doAsyncAwait();
-console.log(`${atTime(new Date())} : done calling async() method`);
+console.log(`${atTime()} : done calling async() method`);
 
