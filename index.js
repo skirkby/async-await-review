@@ -1,3 +1,6 @@
+
+// see index_compressed.js for a version of this file without any comments.
+
 // a helper function to create a formatted time stamp for console log entries.
 function atTime(dte) {
     const date = dte || new Date();
