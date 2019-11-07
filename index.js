@@ -144,31 +144,35 @@ function promiseFunction() {
 //
 // You can chain multiple .then() and .catch() methods, as they both return a
 // Promise object.
-promiseFunction()
-    // when the promise object is resolved, the value passed to the
-    // Promise.resolve() method is sent in to our callback (which we pass to
-    // .then() below). Here, I've named the parameter in our callback function
-    // "successResult". 
-    .then(successResult => {
-        console.log(`${successResult} - (promise call)`);
-    })
-    // when the promise object is rejected, or if there is an exception, the
-    // value passed to the Promise.reject() method (or the object that is thrown
-    // in the exception) is sent in to our callback (which we pass to .catch()
-    // below). Here, I've named the parameter in our callback function
-    // "errorResult". 
-    .catch(errorResult => {
-        console.log(`${errorResult} - (promise call)`);
-    })
-    // the finally function is added to the "promise chain", and is *always*
-    // executed, whether the promise resolved or rejected, whether the .then()
-    // function was called, or the .catch() function. This gives you an
-    // opportunity to perform "clean up" code (closing DB connections, cleaning
-    // up setTimeouts(), etc.), whether there was an error or not. Some things
-    // you need to do no matter what the result of the promise was.
-    .finally(() => {
-        console.log(`${atTime(new Date())} : Finally! - (promise call)`);
-    });
+function doPromise() {
+    promiseFunction()
+        // when the promise object is resolved, the value passed to the
+        // Promise.resolve() method is sent in to our callback (which we pass to
+        // .then() below). Here, I've named the parameter in our callback function
+        // "successResult". 
+        .then(successResult => {
+            console.log(`${successResult} - (promise call)`);
+        })
+        // when the promise object is rejected, or if there is an exception, the
+        // value passed to the Promise.reject() method (or the object that is thrown
+        // in the exception) is sent in to our callback (which we pass to .catch()
+        // below). Here, I've named the parameter in our callback function
+        // "errorResult". 
+        .catch(errorResult => {
+            console.log(`${errorResult} - (promise call)`);
+        })
+        // the finally function is added to the "promise chain", and is *always*
+        // executed, whether the promise resolved or rejected, whether the .then()
+        // function was called, or the .catch() function. This gives you an
+        // opportunity to perform "clean up" code (closing DB connections, cleaning
+        // up setTimeouts(), etc.), whether there was an error or not. Some things
+        // you need to do no matter what the result of the promise was.
+        .finally(() => {
+            console.log(`${atTime(new Date())} : Finally! - (promise call)`);
+        });
+}
+
+doPromise();
 // we should see this log entry in the console before the log entries up above.
 // The call to promiseFunction() immediately returns a Promise object, even if
 // the long running work in promiseFunction() isn't done yet (assuming the long
@@ -198,7 +202,7 @@ console.log(`${atTime(new Date())} : done calling promiseFunction()`);
 //
 // The "async" modifier before a function definition causes the function to be
 // executed on another thread, and to return a Promise object. 
-(async () => {
+async function doAsyncAwait() {
     try {
         // this call returns a Promise object from promiseFunction(), but
         // execution of the code doesn't continue until the Promise is resolved
@@ -218,7 +222,9 @@ console.log(`${atTime(new Date())} : done calling promiseFunction()`);
     } finally {
         console.log(`${atTime(new Date())} : Finally! - (async call)`);
     }
-})();
+}
+
+doAsyncAwait();
 // we should see this log entry in the console before the log entries up above.
 // The call to the async function immediately returns a Promise object. But we
 // don't use that promise object to register our handler functions. The handler
