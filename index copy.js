@@ -15,7 +15,6 @@ function isSuccessful(result) {
 }
 
 function longRunningFunction() {
-    // no-op ... this is just to simulate a long running function.
     const dte = new Date();
     const ms = dte.getMilliseconds();
     const time = atTime(dte);
