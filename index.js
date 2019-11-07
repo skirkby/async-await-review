@@ -1,8 +1,10 @@
+// a helper function to create a formatted time stamp for console log entries.
 function atTime(dte) {
-    const ms = dte.getMilliseconds();
-    const min = dte.getMinutes();
-    const sec = dte.getSeconds();
-    const hr = dte.getHours();
+    const date = dte || new Date();
+    const ms = date.getMilliseconds();
+    const min = date.getMinutes();
+    const sec = date.getSeconds();
+    const hr = date.getHours();
     const time = `${hr}:${min}:${sec}.${ms}`;
 
     return time;
@@ -168,7 +170,7 @@ function doPromise() {
         // up setTimeouts(), etc.), whether there was an error or not. Some things
         // you need to do no matter what the result of the promise was.
         .finally(() => {
-            console.log(`${atTime(new Date())} : Finally! - (promise call)`);
+            console.log(`${atTime(new Date())} :     Finally! - (promise call)`);
         });
 }
 
@@ -220,7 +222,7 @@ async function doAsyncAwait() {
         // in this "finally" block will be executed, just as with the .finally()
         // call above.
     } finally {
-        console.log(`${atTime(new Date())} : Finally! - (async call)`);
+        console.log(`${atTime(new Date())} :     Finally! - (async call)`);
     }
 }
 
